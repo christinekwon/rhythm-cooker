@@ -1,0 +1,77 @@
+body {
+    background-color: rgb(105, 158, 207);
+}
+
+.container {
+    text-align: center;
+    align-content: center;
+    /* position: absolute; */
+    margin-top: 20vh;
+}
+
+button {
+    font-family: "Helvetica Neue";
+    align-content: center;
+    /* position: absolute; */
+    display: inline-block;
+    border: 3px solid white;
+    color: white;
+    background: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px;
+    width: 200px;
+}
+
+#start {
+    margin: 50px;
+    font-family: "Helvetica Neue";
+    align-content: center;
+    /* position: absolute; */
+    display: inline-block;
+    border: 3px solid white;
+    color: white;
+    background: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 50px;
+}
+
+#start:hover {
+  border: 3px solid white;
+    color: #5d81cf;
+    background: white;
+}
+
+button:hover {
+    border: 3px solid white;
+    color: #5d81cf;
+    background: white;
+}
+
+#mapping {
+    visibility: hidden;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.664);
+    color: #5d81cf;
+    width: 30vw;
+}
+
+select {
+  width: 200px;
+  padding: 5px;
+  margin: 15px;
+  text-align: center;
+}
+
+option {
+  text-align: center;
+}
+input {
+  width: 200px;
+  padding: 5px;
+  margin: 15px;
+  text-align: center;
+}

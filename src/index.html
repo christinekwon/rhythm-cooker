@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
     />
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- <script
       async
@@ -23,48 +24,157 @@
     </script>
   </head>
   <style>
+    body {
+        background-color: rgb(163, 194, 223);
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+		font-family: "Helvetica Neue";
+		letter-spacing: 0.5px;
+
+    }
+
     .container {
-      text-align: left;
-      align-content: left;
-      position: absolute;
-      margin: 25px;
+        text-align: center;
+        align-content: center;
+        margin-top: 20vh;
     }
 
-    button {
-      font-family: "Helvetica Neue";
-      align-content: center;
-      /* position: absolute; */
-      display: inline-block;
-      /* margin: 3%; */
-      border: 3px solid white;
-      color: white;
-      background: transparent;
-      padding: 5px 10px;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 25px;
+    .button {
+        font-family: "Helvetica Neue";
+        align-content: center;
+        display: inline-block;
+        border: 3px solid white;
+        color: white;
+        background: transparent;
+		padding: 5px 10px 8px 10px;
+        font-size: 15px;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+
+        margin: 20px;
+		width: 100px;
+		border-radius: 7px;
+		background-color: rgb(147, 180, 211);
+		/* opacity: 0.7; */
+
+		-webkit-transition: .2s;
+		transition: background-color .2s;
     }
 
-    #start:hover {
-      border: 3px solid white;
-      color: #5d81cf;
-      background: white;
-    }
+	.button:hover {
+		/* color: #5d81cf; */
+		background-color: rgb(96, 135, 172);
+		/* opacity: 1; */
+	}
 
     #mapping {
-      visibility: hidden;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.664);
-      color: #5d81cf;
-      width: 30vw;
+        visibility: hidden;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.664);
+        color: #5d81cf;
+        width: 30vw;
     }
+
+    select {
+		width: 200px;
+		padding: 5px;
+		margin: 15px;
+		text-align: center;
+		border: 3px solid white;
+		border-radius: 7px;
+		opacity: 0.8;
+		background-color: white;
+		color: rgb(96, 135, 172);
+		font-weight: 700;
+
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+	
+	select:hover {
+      	opacity: 1;
+    }
+
+    option {
+      	text-align: center;
+	}
+	
+    #tempo {
+		margin: 20px;      
+		-webkit-appearance: none;
+		width: 200px;
+		height: 15px;
+		border-radius: 10px;
+		background: #ffffff;
+		outline: none;
+		opacity: 0.8;
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+    }
+
+    #tempo:hover {
+      	opacity: 1;
+    }
+
+	#tempo::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: rgb(96, 135, 172);
+		cursor: pointer;
+	}
   </style>
 
   <body>
     <div class="container">
-      <button id="start">click 4 audio ~</button>
+      <form onSubmit="return false;">
+		<div class="input-container">
+			<label for="key">key:</label><br>
+			<select id="key" name="key">
+			<option value="C">c major [ a minor ]</option>
+			<option value="G">g major [ c minor ]</option>
+			<option value="D">d major [ b minor ]</option>
+			<option value="A">a major [ f# minor ]</option>
+			<option value="E">e major [ c# minor ]</option>
+			<option value="B">b major [ g# minor ]</option>
+			<option value="F+">f# major [ d# minor ]</option>
+			<option value="C+">c# major [ a# minor ]</option>
+			<option value="F">c major [ d minor ]</option>
+			<option value="B-">b&#9837; major [ g minor ]</option>
+			<option value="E-">e&#9837; major [ c minor ]</option>
+			<option value="A-">a&#9837; major [ f minor ]</option>
+			<option value="D-">d&#9837; major [ b&#9837; minor ]</option>
+			<option value="G-">g&#9837; major [ c&#9837; minor ]</option>
+			<option value="C-">c&#9837; major [ a&#9837; minor ]</option>
+			</select>
+		</div>
+        <br>
+        <!-- <label for="time">time:</label><br> -->
+        <!-- <select id="time" name="time">
+          <option value="44">4/4</option>
+          <option value="34">3/4</option>
+          <option value="24">2/4</option>
+          <option value="14">1/4</option>
+          <option value="68">6/8</option>
+        <br> -->
+		<label for="tempo">tempo:</label><br>
+		<div class="input-container">
+			<input type="range" id="tempo" name="tempo" 
+			min="0" max="200" value="100" step="1" oninput="num.value = this.value">
+			<br>
+			<output id="num">100</output>
+		</div>
+        <br>
+		<input class="button" type="submit" value="gener8" id="start">
+		<button class="button" id="stop">stop</button>
+
+      </form> 
+
       <br>
-      <button id="info">info ~</button>
+      <button class="button" id="info">info</button>
       <br>
       <img id="mapping">
       <!-- <div id="info-text">"qwertyui" on the keyboard corresponds to music notes "cdefgabc" :)</div> -->
