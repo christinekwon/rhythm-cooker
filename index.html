@@ -6,7 +6,7 @@
 
       gtag("config", "UA-165939739-1");</script><link rel="icon" href="/rhythm-cooker/favicon.ico"></head><style>body {
         background-color: rgb(163, 194, 223);
-        font-size: 15px;
+        font-size: 20px;
         font-weight: 700;
         color: white;
 		font-family: "Helvetica Neue";
@@ -17,25 +17,25 @@
     .container {
         text-align: center;
         align-content: center;
-        margin-top: 20vh;
+        margin-top: 10vh;
     }
 
     .button {
         font-family: "Helvetica Neue";
         align-content: center;
         display: inline-block;
-        border: 3px solid white;
+        border: none;
         color: white;
         background: transparent;
-		padding: 5px 10px 8px 10px;
-        font-size: 15px;
+		padding: 6px 10px 8px 10px;
+        font-size: 18px;
 		font-weight: 700;
 		letter-spacing: 0.5px;
 
         margin: 20px;
 		width: 100px;
-		border-radius: 7px;
-		background-color: rgb(147, 180, 211);
+		border-radius: 30px;
+		background-color: rgb(129, 166, 201);
 		/* opacity: 0.7; */
 
 		-webkit-transition: .2s;
@@ -48,25 +48,41 @@
 		/* opacity: 1; */
 	}
 
+	/* #info {
+		background-color: rgb(96, 135, 172);
+		border: none;
+		opacity: 0.7;
+	}
+
+	#info:hover {
+		opacity: 1;
+
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	} */
+
     #mapping {
         visibility: hidden;
         padding: 10px;
         background: rgba(255, 255, 255, 0.664);
         color: #5d81cf;
-        width: 30vw;
-    }
+		width: 50vw;
+		margin: 20px;
+		max-width: 500px;
+	}
 
     select {
-		width: 200px;
-		padding: 5px;
+		width: 300px;
+		padding: 7px;
 		margin: 15px;
 		text-align: center;
-		border: 3px solid white;
-		border-radius: 7px;
+		border: 5px solid white;
+		border-radius: 30px;
 		opacity: 0.8;
 		background-color: white;
 		color: rgb(96, 135, 172);
 		font-weight: 700;
+		font-size: 16px;
 
 		-webkit-transition: .2s;
 		transition: opacity .2s;
@@ -83,7 +99,7 @@
     #tempo {
 		margin: 20px;      
 		-webkit-appearance: none;
-		width: 200px;
+		width: 300px;
 		height: 15px;
 		border-radius: 10px;
 		background: #ffffff;
@@ -105,4 +121,68 @@
 		border-radius: 50%;
 		background: rgb(96, 135, 172);
 		cursor: pointer;
-	}</style><body><div class="container"><form onsubmit="return false;"><div class="input-container"><label for="key">key:</label><br><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">c major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div><br><label for="tempo">tempo:</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div><br><input class="button" type="submit" value="gener8" id="start"> <button class="button" id="stop">stop</button></form><br><button class="button" id="info">info</button><br><img id="mapping"></div><script src="/rhythm-cooker/main.e562ceef3e9b8aa6884f.js"></script></body><script></script></html>
+	}
+
+
+	/*slider*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin: 20px;
+
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:rgb(131, 164, 196);
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+
+}
+
+.slider:hover {
+	background-color: rgb(96, 135, 172);
+}
+
+input:checked + .slider {
+  background-color: rgb(96, 135, 172);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(96, 135, 172);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}</style><body><div class="container"><form onsubmit="return false;"><div class="input-container"><label for="key">key</label><br><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div><br><div class="input-container"><label for="tempo">tempo</label><br><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div><br><input class="button" type="submit" value="play" id="start"></form><button class="button" id="chord">chord</button><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><img id="mapping"></div><script src="/rhythm-cooker/main.75f6b0e84ed280841741.js"></script></body><script></script></html>
