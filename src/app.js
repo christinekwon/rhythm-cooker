@@ -53,6 +53,13 @@ const NOTE_COUNT = 7;
 const LENGTH_COUNT = LENGTHS.length;
 const BARS = 4;
 
+var play = false;
+var showMap = false;
+
+var gen;
+var music;
+var keyboard;
+
 // graphics start here
 
 // Initialize core ThreeJS components
@@ -103,8 +110,21 @@ const BARS = 4;
 
 document.getElementById("start").addEventListener("click", start);
 
-document.getElementById("info").addEventListener("mouseover", showInfo);
-document.getElementById("info").addEventListener("mouseout", hideInfo);
+document.getElementById("start").addEventListener("mouseover", function() {
+	document.getElementById("start").style.background = "rgb(96, 135, 172)";
+});
+
+document.getElementById("start").addEventListener("mouseout", function() {
+	if (!play) {
+		document.getElementById("start").style.background = "rgb(129, 166, 201)";
+	}
+});
+
+
+document.getElementById("chord").addEventListener("click", chord);
+
+document.getElementById("info").addEventListener("change", showInfo);
+// document.getElementById("info").addEventListener("mouseout", hideInfo);
 document.getElementById("tempo").addEventListener("onchange", updateTextInput);
 
 function updateTextInput() {
@@ -114,37 +134,12 @@ function updateTextInput() {
 }
 
 function start() {
-	document.getElementById("stop").addEventListener("click", stop);
+	// document.getElementById("stop").addEventListener("click", stop);
 
     var key = document.getElementById("key").value;
 	var tempo = parseInt(document.getElementById("tempo").value);
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
-
-	var T = require("./timbre.js");
-	require("./keyboard.js");
-	require("./ndict.js");
-	require("./midicps.js");
-	var synth, keydict, midicps;
-	var table = [0.8, [0, 1500]];
-
-	var env = T("perc", {r:700});
-	synth = T("OscGen", {wave:"sin", env:env, mul:0.2}).play();
-	keydict = T("ndict.key");
-	midicps = T("midicps");
-
-	T("keyboard").on("keydown", function(e) {
-		var midi = keydict.at(e.keyCode);
-		if (midi) {
-		var freq = midicps.at(midi);
-		synth.noteOnWithFreq(freq, 100);
-		}
-	}).on("keyup", function(e) {
-		var midi = keydict.at(e.keyCode);
-		if (midi) {
-		synth.noteOff(midi, 100);
-		}
-	}).start();
 
     var T = require("./timbre.js");
     
@@ -161,50 +156,83 @@ function start() {
 
     // var mml = "l8 t120 c4c+d d+4ef f+4gg+ a4a+b <c>bb-aa-gg-fee-dd-c2.";
 
-    // var mml = "l2 g0<c0e>";
-
-    var lengthList = [];
-
-	var remainingTime = 1;
+	// var mml = "l2 g0<c0e>";
 	
+	if (!play) {
+		document.getElementById("start").value = "stop";
+		document.getElementById("start").style.background = "rgb(96, 135, 172)";
 
+		var lengthList = [];
 
-    while (remainingTime > 0) {
-        lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
-    }
-
-    var noteList = getNotes(lengthList, key);
-
-    let bar1 = format(lengthList, noteList);
-
-    lengthList = [];
-
-    remainingTime = 1;
-
-    while (remainingTime > 0) {
-        lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
-    }
-
-    var noteList = getNotes(lengthList, key);
-
-    let bar2 = format(lengthList, noteList);
-
-    var mml = initialMML(4, tempo);
-    // mml += bar1;
-    // mml += " ";
-    for (let i = 0; i < 300; i++) {
-		mml += bar1;
+		var remainingTime = 1;
+	
+		while (remainingTime > 0) {
+			lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
+		}
+	
+		var noteList = getNotes(lengthList, key);
+	
+		let bar1 = format(lengthList, noteList);
+	
+		lengthList = [];
+	
+		remainingTime = 1;
+	
+		while (remainingTime > 0) {
+			lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
+		}
+	
+		var noteList = getNotes(lengthList, key);
+	
+		let bar2 = format(lengthList, noteList);
+	
+		var mml = initialMML(4, tempo);
+		// mml += bar1;
+		// mml += " ";
+		for (let i = 0; i < 300; i++) {
+			mml += bar1;
+			// mml += bar2;
+		}
 		// mml += bar2;
-    }
-    // mml += bar2;
-    // mml += " ";
-    // mml += bar1 + bar2;
-    // mml += format(lengthList, noteList);
+		// mml += " ";
+		// mml += bar1 + bar2;
+		// mml += format(lengthList, noteList);
+	
+		// console.log(mml);
+		// console.log(tempo);
+	
+		gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
+		
+		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
+		play = true;
+	}
+	else {
+		document.getElementById("start").style.background = "rgb(129, 166, 201)";
+		document.getElementById("start").value = "play";
+		stop();
+		play = false;
+	}
+	
+	function stop() {
+		gen.pause();
+		music.stop();
+	}
+}
 
-	// console.log(mml);
-	// console.log(tempo);
+function chord() {
 
-    var gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
+    var key = document.getElementById("key").value;
+
+	var T = require("./timbre.js");
+
+
+
+
+	// var mml = "l2 g0<c0e>";
+	var mml = "l1" + keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + "0"
+	+ keys[key][Math.floor(Math.random() * (NOTE_COUNT))];
+
+	var gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
     
     var music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 	
@@ -294,7 +322,44 @@ function format(lengthList, noteList) {
 document.getElementById("mapping").src = MAPPING;
 
 function showInfo() {
-  document.getElementById("mapping").style.visibility = "visible";
+	var isChecked = document.getElementById("info").checked;
+	if (isChecked) {
+		document.getElementById("mapping").style.visibility = "visible";
+		document.getElementById("info").innerHTML = "turn keyboard off";
+		showMap = true;
+
+		var T = require("./timbre.js");
+		require("./keyboard.js");
+		require("./ndict.js");
+		require("./midicps.js");
+		var synth, keydict, midicps;
+		var table = [0.8, [0, 1500]];
+	
+		var env = T("perc", {r:700});
+		synth = T("OscGen", {wave:"sin", env:env, mul:0.2}).play();
+		keydict = T("ndict.key");
+		midicps = T("midicps");
+	
+		keyboard = T("keyboard").on("keydown", function(e) {
+			var midi = keydict.at(e.keyCode);
+			if (midi) {
+			var freq = midicps.at(midi);
+			synth.noteOnWithFreq(freq, 100);
+			}
+		}).on("keyup", function(e) {
+			var midi = keydict.at(e.keyCode);
+			if (midi) {
+			synth.noteOff(midi, 100);
+			}
+		}).start();
+
+	}
+	else {
+		document.getElementById("mapping").style.visibility = "hidden";
+		document.getElementById("info").innerHTML = "turn keyboard on";
+		keyboard.stop();
+		showMap = false;
+	}
 }
 
 function hideInfo() {
