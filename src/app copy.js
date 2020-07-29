@@ -324,8 +324,8 @@ function showInfo() {
 
 	var isChecked = document.getElementById("info").checked;
 	if (isChecked) {
-		// $(document.getElementById("mobile-keyboard")).focus();
-		$(document.getElementById("mobile-keyboard")).trigger("focus");
+		$(document.getElementById("mobile-keyboard")).focus();
+		$(document.getElementById("info")).trigger("focus");
 
 		document.getElementById("mapping").style.visibility = "visible";
 		document.getElementById("info").innerHTML = "turn keyboard off";
