@@ -1,98 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
-    />
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-165939739-1"
-    ></script> -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+<head>
+	<meta charset="utf-8" />
+	<title><%= htmlWebpackPlugin.options.title %></title>
+	<link
+	rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
+	/>
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- <script
+	async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-165939739-1"
+	></script> -->
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag("js", new Date());
 
-      gtag("config", "UA-165939739-1");
-    </script>
-  </head>
-  <style>
-    body {
-        background-color: rgb(163, 194, 223);
-        font-size: 20px;
-        font-weight: 700;
-        color: white;
+	gtag("config", "UA-165939739-1");
+	</script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+</head>
+<style>
+	body {
+		background-color: rgb(163, 194, 223);
+		font-size: 20px;
+		font-weight: 700;
+		color: white;
 		font-family: "Helvetica Neue";
 		letter-spacing: 0.5px;
 
-    }
+	}
 
-    .container {
-        text-align: center;
-        align-content: center;
-        margin-top: 10vh;
-    }
+	.container {
+		text-align: center;
+		align-content: center;
+		margin-top: 5vh;
+	}
 
-    .button {
-        font-family: "Helvetica Neue";
-        align-content: center;
-        display: inline-block;
-        border: none;
-        color: white;
-        background: transparent;
+	.button {
+		font-family: "Helvetica Neue";
+		align-content: center;
+		display: inline-block;
+		border: none;
+		color: white;
+		background: transparent;
 		padding: 6px 10px 8px 10px;
-        font-size: 18px;
+		font-size: 18px;
 		font-weight: 700;
 		letter-spacing: 0.5px;
 
-        margin: 20px;
+		margin: 20px;
 		width: 100px;
 		border-radius: 30px;
 		background-color: rgb(129, 166, 201);
-		/* opacity: 0.7; */
 
 		-webkit-transition: .2s;
 		transition: background-color .2s;
-    }
+	}
 
 	.button:hover {
-		/* color: #5d81cf; */
 		background-color: rgb(96, 135, 172);
-		/* opacity: 1; */
 	}
 
-	/* #info {
-		background-color: rgb(96, 135, 172);
-		border: none;
-		opacity: 0.7;
-	}
-
-	#info:hover {
-		opacity: 1;
-
-		-webkit-transition: .2s;
-		transition: opacity .2s;
-	} */
-
-    #mapping {
-        visibility: hidden;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.664);
-        color: #5d81cf;
+	#mapping {
+		visibility: hidden;
+		padding: 10px;
+		background: rgba(255, 255, 255, 0.664);
+		color: #5d81cf;
 		width: 50vw;
 		margin: 20px;
 		max-width: 500px;
 	}
 
-    select {
-		width: 300px;
+	select {
+		width: 50vw;
+		max-width: 300px;
 		padding: 7px;
 		margin: 15px;
 		text-align: center;
@@ -109,17 +96,18 @@
 	}
 	
 	select:hover {
-      	opacity: 1;
-    }
+		opacity: 1;
+	}
 
-    option {
-      	text-align: center;
+	option {
+		text-align: center;
 	}
 	
-    #tempo {
+	#tempo {
 		margin: 20px;      
 		-webkit-appearance: none;
-		width: 300px;
+		width: 50vw;
+		max-width: 300px;
 		height: 15px;
 		border-radius: 10px;
 		background: #ffffff;
@@ -127,11 +115,11 @@
 		opacity: 0.8;
 		-webkit-transition: .2s;
 		transition: opacity .2s;
-    }
+	}
 
-    #tempo:hover {
-      	opacity: 1;
-    }
+	#tempo:hover {
+		opacity: 1;
+	}
 
 	#tempo::-webkit-slider-thumb {
 		-webkit-appearance: none;
@@ -147,45 +135,45 @@
 	/*slider*/
 
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: 20px;
+position: relative;
+display: inline-block;
+width: 60px;
+height: 34px;
+margin: 20px;
 
 }
 
 .switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
+opacity: 0;
+width: 0;
+height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color:rgb(131, 164, 196);
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color:rgb(131, 164, 196);
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 34px;
 
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 50%;
 
 }
 
@@ -194,26 +182,111 @@
 }
 
 input:checked + .slider {
-  background-color: rgb(96, 135, 172);
+background-color: rgb(96, 135, 172);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px rgb(96, 135, 172);
+box-shadow: 0 0 1px rgb(96, 135, 172);
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(26px);
 }
 
-  </style>
+.input-container {
+	margin: 3vh auto;
+}
 
-  <body>
-    <div class="container">
-      <form onSubmit="return false;">
+.sound {
+	border-radius: 5px;
+	border: none;
+}
+
+.check-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin: 20px 10px 0px 10px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+/* On mouse-over, add a grey background color */
+.check-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-container input:checked ~ .checkmark {
+  background-color: rgb(96, 135, 172);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-container .checkmark:after {
+  left: 7px;
+  top: 5px;
+  width: 3px;
+  height: 5px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.check-text {
+	font-size: 14px;
+	color:rgb(37, 71, 104);
+}
+
+.param {
+	color:white;
+}
+
+</style>
+
+<body>
+	<div class="container">
+	<form onSubmit="return false;">
 		<div class="input-container">
-			<label for="key">key</label><br>
+			<label for="key" class="param">key</label><br>
 			<select id="key" name="key">
 			<option value="C">c major [ a minor ]</option>
 			<option value="G">g major [ c minor ]</option>
@@ -232,42 +305,64 @@ input:checked + .slider:before {
 			<option value="C-">c&#9837; major [ a&#9837; minor ]</option>
 			</select>
 		</div>
-        <br>
-        <!-- <label for="time">time:</label><br> -->
-        <!-- <select id="time" name="time">
-          <option value="44">4/4</option>
-          <option value="34">3/4</option>
-          <option value="24">2/4</option>
-          <option value="14">1/4</option>
-          <option value="68">6/8</option>
-        <br> -->
+		<!-- <label for="time">time:</label><br> -->
+		<!-- <select id="time" name="time">
+		<option value="44">4/4</option>
+		<option value="34">3/4</option>
+		<option value="24">2/4</option>
+		<option value="14">1/4</option>
+		<option value="68">6/8</option>
+		<br> -->
 		<div class="input-container">
-			<label for="tempo">tempo</label><br>
+			<label for="tempo" class="param">tempo</label><br>
 			<input type="range" id="tempo" name="tempo" 
 			min="0" max="200" value="100" step="1" oninput="num.value = this.value">
 			<br>
 			<output id="num">100</output>
 		</div>
-        <br>
+
+		<div class="input-container">
+			<label class="param">sound</label><br>
+			<label class="check-container">
+				<input type="checkbox" class="sound" value="1" name="mallet" id="sound0" checked="true"/>
+				<span class="check-text">mallet</span>
+				<span class="checkmark"></span>
+			</label>
+			<label class="check-container">
+			<input type="checkbox" class="sound" value="1" name="synth" id="sound1" />
+				<span class="check-text">synth</span>
+				<span class="checkmark"></span>
+			</label>
+			<label class="check-container">
+				<input type="checkbox" class="sound" value="1" name="guitar" id="sound2" />
+				<span class="check-text">guitar</span>
+				<span class="checkmark"></span>
+			</label>
+			<label class="check-container">
+				<input type="checkbox" class="sound" value="1" name="kick" id="sound3" />
+				<span class="check-text">kick</span>
+				<span class="checkmark"></span>
+			</label>
+		</div>
 		<input class="button" type="submit" value="play" id="start">
 		<!-- <button class="button" id="stop">stop</button> -->
-      </form> 
+	</form> 
 
-	  <button class="button" id="chord">chord</button>
+	<button class="button" id="chord">chord</button>
 		<br><br>
 		<label id="keyboard-text" for="switch">keyboard</label><br>
 		<label class="switch">
 			<input type="checkbox" id="info">
 			<span class="slider round"></span>
 		</label>
-      <!-- <button class="button" id="info">turn keyboard on</button> -->
-      <br>
-      <img id="mapping">
-      <!-- <div id="info-text">"qwertyui" on the keyboard corresponds to music notes "cdefgabc" :)</div> -->
-    </div>
-  </body>
-  
-  <script>
-    
-  </script>
+	<!-- <button class="button" id="info">turn keyboard on</button> -->
+	<br>
+	<img id="mapping">
+	<!-- <div id="info-text">"qwertyui" on the keyboard corresponds to music notes "cdefgabc" :)</div> -->
+	</div>
+</body>
+
+	<script>
+
+	</script>
 </html>

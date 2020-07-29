@@ -6,9 +6,9 @@
  * handles window resizes.
  *
  */
-import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { SeedScene } from 'scenes';
+// import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
+// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+// import { SeedScene } from 'scenes';
 import MAPPING from "./mapping.png";
 
 // initialize constants
@@ -53,60 +53,16 @@ const NOTE_COUNT = 7;
 const LENGTH_COUNT = LENGTHS.length;
 const BARS = 4;
 
+const NUM_SOUNDS = 4;
+
 var play = false;
 var showMap = false;
 
+var T;
 var gen;
 var music;
 var keyboard;
-
-// graphics start here
-
-// Initialize core ThreeJS components
-// const scene = new SeedScene();
-// const camera = new PerspectiveCamera();
-// const renderer = new WebGLRenderer({ antialias: true });
-
-// // Set up camera
-// camera.position.set(6, 3, -10);
-// camera.lookAt(new Vector3(0, 0, 0));
-
-// // Set up renderer, canvas, and minor CSS adjustments
-// renderer.setPixelRatio(window.devicePixelRatio);
-// const canvas = renderer.domElement;
-// canvas.style.display = 'block'; // Removes padding below canvas
-// document.body.style.margin = 0; // Removes margin around page
-// document.body.style.overflow = 'hidden'; // Fix scrolling
-// document.body.appendChild(canvas);
-
-// // Set up controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.enableDamping = true;
-// controls.enablePan = false;
-// controls.minDistance = 4;
-// controls.maxDistance = 16;
-// controls.update();
-
-// // Render loop
-// const onAnimationFrameHandler = (timeStamp) => {
-//     controls.update();
-//     renderer.render(scene, camera);
-//     scene.update && scene.update(timeStamp);
-//     window.requestAnimationFrame(onAnimationFrameHandler);
-// };
-// window.requestAnimationFrame(onAnimationFrameHandler);
-
-// Resize Handler
-// const windowResizeHandler = () => {
-//     const { innerHeight, innerWidth } = window;
-//     renderer.setSize(innerWidth, innerHeight);
-//     camera.aspect = innerWidth / innerHeight;
-//     camera.updateProjectionMatrix();
-// };
-// windowResizeHandler();
-// window.addEventListener('resize', windowResizeHandler, false);
-
-// graphics end here
+var sound = "mallet";
 
 document.getElementById("start").addEventListener("click", start);
 
@@ -119,6 +75,26 @@ document.getElementById("start").addEventListener("mouseout", function() {
 		document.getElementById("start").style.background = "rgb(129, 166, 201)";
 	}
 });
+
+function toggle(e){
+	var checkbox;
+	let id;
+	for (let i = 0 ; i < NUM_SOUNDS; i++) {
+		id ="sound" + i;
+		checkbox = document.getElementById(id);
+		if (id == e.target.id){
+			sound = e.target.name;
+		}
+		else {
+			checkbox.checked = false;
+		}
+	}
+}
+
+var sounds = document.getElementsByClassName("sound");
+for (var i = 0; i < sounds.length; i++) {
+	sounds[i].addEventListener("click", toggle);
+}
 
 
 document.getElementById("chord").addEventListener("click", chord);
@@ -141,7 +117,7 @@ function start() {
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
 
-    var T = require("./timbre.js");
+    T = require("./timbre.js");
     
   // c4c+d == c c# d 2-1-1
   // + is a sharp
@@ -200,9 +176,9 @@ function start() {
 	
 		// console.log(mml);
 		// console.log(tempo);
-	
-		gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
-		
+
+		initializeGen();
+
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
 	}
@@ -219,26 +195,46 @@ function start() {
 	}
 }
 
+
+
+
 function chord() {
 
     var key = document.getElementById("key").value;
 
-	var T = require("./timbre.js");
-
-
-
+	T = require("./timbre.js");
 
 	// var mml = "l2 g0<c0e>";
 	var mml = "l1" + keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + "0"
 	+ keys[key][Math.floor(Math.random() * (NOTE_COUNT))];
 
-	var gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
-    
+	initializeGen();
+	
     var music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 	
 	function stop() {
 		gen.pause();
 		music.stop();
+	}
+}
+
+function initializeGen() {
+	if (sound == "mallet") {
+		gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
+	}
+	else if (sound == "synth") {
+		// synth, change r for reverb
+		var osc = T("pulse");
+		var env = T("perc", {a:50, r:2500});
+		gen = T("OscGen", {osc:osc, env:env, mul:0.1}).play();
+	}
+	else if (sound == "guitar") {
+		var env = T("perc", {a:50, r:2500});
+		gen = T("PluckGen", {env:env, mul:0.5}).play();
+	}
+	else if (sound == "kick") {
+		// drum, add changes things
+		gen = T("OscGen", {wave:"sin", freq:2, add:3200, mul:0.3, kr:10}).play();
 	}
 }
 
@@ -322,8 +318,13 @@ function format(lengthList, noteList) {
 document.getElementById("mapping").src = MAPPING;
 
 function showInfo() {
+	// trigger("focus");
+
 	var isChecked = document.getElementById("info").checked;
 	if (isChecked) {
+		// $(document.getElementById("info")).focus();
+		$(document.getElementById("info")).trigger("focus");
+
 		document.getElementById("mapping").style.visibility = "visible";
 		document.getElementById("info").innerHTML = "turn keyboard off";
 		showMap = true;
@@ -365,16 +366,3 @@ function showInfo() {
 function hideInfo() {
   document.getElementById("mapping").style.visibility = "hidden";
 }
-
-// add back for graphics (2 lines)
-// windowResizeHandler();
-// window.addEventListener('resize', windowResizeHandler, false);
-
-
-
-// window.addEventListener("keydown", handleKeyDown);
-// // window.addEventListener("keyup", handleKeyUp);
-// function handleKeyDown(event) {
-//       scene.key = event.key;
-
-//   }
