@@ -10,6 +10,8 @@
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // import { SeedScene } from 'scenes';
 import MAPPING from "./mapping.png";
+import WAVES from "./waves.png";
+
 
 // initialize constants
 
@@ -314,15 +316,15 @@ function format(lengthList, noteList) {
 }
 
 
-
 document.getElementById("mapping").src = MAPPING;
+document.getElementById("waves").src = WAVES;
 
 function showInfo() {
 	// trigger("focus");
 
 	var isChecked = document.getElementById("info").checked;
 	if (isChecked) {
-		// $(document.getElementById("info")).focus();
+		$(document.getElementById("mobile-keyboard")).focus();
 		$(document.getElementById("info")).trigger("focus");
 
 		document.getElementById("mapping").style.visibility = "visible";
