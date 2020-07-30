@@ -42,10 +42,10 @@
 		margin: 3%;
 		width: 30vw;
 		min-width: 150px;
-		max-width: 250px;
+		/* max-width: 250px; */
 		height: 30vw;
 		min-height: 150px;
-		max-height: 250px;
+		/* max-height: 250px; */
 		border-radius: 50%;
 		align-content: center;
 		text-align: center;
@@ -271,7 +271,7 @@
 		font-size: 3vw;
 	}
 
-	@media screen and (max-width: 1000px) {
+	@media screen and (max-width: 1200px) {
 
 		.bubble {
 			position: relative;
@@ -333,4 +333,4 @@
 			font-size: 7vw;
 		}
 
-	}</style><body><img id="waves"><div class="container"><form onsubmit="return false;"><div class="row"><div class="bubble" id="bubble0"><label for="key" class="param">key</label><br><div class="input-container"><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div></div><div class="bubble" id="bubble1"><label for="tempo" class="param">tempo</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div></div></div><div class="row"><div class="bubble" id="bubble2"><label class="param">sound</label><br><div class="input-container"><select id="sound" name="sound"><option value="mallet">mallet</option><option value="synth">synth</option><option value="guitar">guitar</option><option value="kick">kick</option></select></div></div><div class="bubble" id="bubble3"><label class="param">repeat</label><br><div class="input-container"><select id="repeat" name="repeat"><option value="1">1 bar</option><option value="2">2 bars</option><option value="3">3 bars</option><option value="4">4 bars</option></select></div></div></div><input class="button" type="submit" value="play" id="start"> <input class="button" type="submit" id="chord" value="chord"></form><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><form><input id="mobile-keyboard"></form><img id="mapping"></div><script src="/rhythm-cooker/main.fd2b42c42ab252f9f1c3.js"></script></body><script></script></html>
+	}</style><body><img id="waves"><div class="container"><form onsubmit="return false;"><div class="row"><div class="bubble" id="bubble0"><label for="key" class="param">key</label><br><div class="input-container"><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div></div><div class="bubble" id="bubble1"><label for="tempo" class="param">tempo</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div></div></div><div class="row"><div class="bubble" id="bubble2"><label class="param">sound</label><br><div class="input-container"><select id="sound" name="sound"><option value="mallet">mallet</option><option value="synth">synth</option><option value="guitar">guitar</option><option value="kick">kick</option></select></div></div><div class="bubble" id="bubble3"><label class="param">repeat</label><br><div class="input-container"><select id="repeat" name="repeat"><option value="1">1 bar</option><option value="2">2 bars</option><option value="3">3 bars</option><option value="4">4 bars</option></select></div></div></div><input class="button" type="submit" value="play" id="start"> <input class="button" type="submit" id="chord" value="chord"></form><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><form><input id="mobile-keyboard"></form><img id="mapping"></div><script src="/rhythm-cooker/main.585c7552916cb8dc6644.js"></script></body><script></script></html>
