@@ -76,9 +76,11 @@
 		display: inline-block;
 		margin: 5%;
 		width: 30vw;
-		max-width: 150px;
+		min-width: 150px;
+		max-width: 250px;
 		height: 30vw;
-		max-height: 150px;
+		min-height: 150px;
+		max-height: 250px;
 		border-radius: 50%;
 		align-content: center;
 		text-align: center;
@@ -97,9 +99,10 @@
 	}
 
 	.param {
+		font-size: 22px;
 		display: block;
 		color:rgb(27, 27, 27);
-		margin-top: 10%;
+		margin-top: 15%;
 		margin-bottom: 0;
 	}
 
@@ -168,7 +171,8 @@
 
 		margin: 20px;
 		width: 100px;
-		border-radius: 30px;
+		height: 100px;
+		border-radius: 50%;
 		background-color: rgba(255, 255, 255, 0.80);
 
 		box-shadow: 0px 0px 25px 0px black;
@@ -335,6 +339,12 @@
 	#mobile-keyboard {
 		/* opacity: 0; */
 		/* visibility: hidden; */
+		width: 100%;
+		position: absolute;
+		bottom: -80%;
+		right: 0%;
+		margin: 0 auto;
+		float: center;
 	}
 
 </style>
@@ -441,11 +451,13 @@
 			</div>
 		</div> -->
 
+
 		<input class="button" type="submit" value="play" id="start">
+		<input class="button" type="submit" id="chord" value="chord">
+
 		<!-- <button class="button" id="stop">stop</button> -->
 	</form> 
 
-	<button class="button" id="chord">chord</button>
 		<br><br>
 		<label id="keyboard-text" for="switch">keyboard</label><br>
 		<label class="switch">
@@ -454,11 +466,12 @@
 		</label>
 	<!-- <button class="button" id="info">turn keyboard on</button> -->
 	<br>
-	<img id="mapping">
-
 	<form>
 		<input type="text" id="mobile-keyboard">
 	</form>
+	<img id="mapping">
+
+
 
 	<!-- <div id="info-text">"qwertyui" on the keyboard corresponds to music notes "cdefgabc" :)</div> -->
 	</div>
