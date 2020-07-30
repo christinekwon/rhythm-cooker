@@ -8,10 +8,15 @@
 		background-color: rgb(27, 27, 27);
 		color: white;
 
-		font-family: ff-cocon-pro,sans-serif;
+		font-family: balboa-plus-fill,sans-serif;
 		font-weight: 400;
 		font-style: normal;
 		font-size: 20px;
+
+		/* font-family: ff-cocon-pro,sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 20px; */
 
 		/* font-family: "Helvetica Neue";
 		letter-spacing: 0.5px;
@@ -37,7 +42,7 @@
 	.container {
 		text-align: center;
 		align-content: center;
-		margin: 3vw;
+		margin: 3vw 0;
 	}
 
 	.row {
@@ -50,7 +55,7 @@
 		position: relative;;
 		top: 20%;
 		display: inline-block;
-		margin: 5%;
+		margin: 3%;
 		width: 30vw;
 		min-width: 150px;
 		max-width: 250px;
@@ -75,7 +80,7 @@
 	}
 
 	.param {
-		font-size: 22px;
+		font-size: 3vw;
 		display: block;
 		color:rgb(27, 27, 27);
 		margin-top: 15%;
@@ -129,26 +134,20 @@
 	}
 
 	.button {
-		font-family: "Helvetica Neue";
 		align-content: center;
 		display: inline-block;
 		border: none;
 		color: rgb(27, 27, 27);
 		background: transparent;
 		padding: 6px 10px 8px 10px;
-		/* font-size: 18px;
-		font-weight: 700;
-		letter-spacing: 0.5px; */
 
-		font-family: ff-cocon-pro,sans-serif;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 20px;
+		font-family: balboa-plus-fill,sans-serif;
+		font-size: 2.5vw;
 
 		margin: 5vh 5vw 0 5vw;
 
-		width: 20vw;
-		height: 20vw;
+		width: 10vw;
+		height: 10vw;
 		max-width: 150px;
 		max-height: 150px;
 		border-radius: 50%;
@@ -176,10 +175,8 @@
 		background-color: white;
 		color: rgb(66, 66, 66);
 
-		font-family: ff-cocon-pro,sans-serif;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 16px;
+		font-family: balboa-plus-fill,sans-serif;
+		font-size: 2vw;
 
 		-webkit-transition: .2s;
 		transition: opacity .2s;
@@ -241,7 +238,7 @@
 	#num {
 		text-align: center;
 		color: rgb(66, 66, 66);
-		font-size: 16px;
+		font-size: 2.5vw;
 	}
 
 	/*keyboard switch */
@@ -289,15 +286,15 @@
 	}
 
 	.slider:hover {
-		background-color: rgb(122, 122, 122);
+		background-color:rgb(255, 138, 161);
 	}
 
 	input:checked + .slider {
-		background-color: rgb(122, 122, 122);
+		background-color: rgba(252,70,107,1);
 	}
 
 	input:focus + .slider {
-		box-shadow: 0 0 1px rgb(122, 122, 122);
+		box-shadow: 0 0 1px rgba(252,70,107,1);
 	}
 
 	input:checked + .slider:before {
@@ -320,4 +317,4 @@
 		width: 75vw;
 		margin: 0 20px;
 		/* max-width: 500px; */
-	}</style><body><img id="waves"><div class="container"><form onsubmit="return false;"><div class="row"><div class="bubble" id="bubble0"><label for="key" class="param">key</label><br><div class="input-container"><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div></div><div class="bubble" id="bubble1"><label for="tempo" class="param">tempo</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div></div></div><div class="row"><div class="bubble" id="bubble2"><label class="param">sound</label><br><div class="input-container"><select id="sound" name="sound"><option value="mallet">mallet</option><option value="synth">synth</option><option value="guitar">guitar</option><option value="kick">kick</option></select></div></div><div class="bubble" id="bubble3"><label class="param">repeat</label><br><div class="input-container"><select id="repeat" name="repeat"><option value="1">1 bar</option><option value="2">2 bars</option><option value="3">3 bars</option><option value="4">4 bars</option></select></div></div></div><input class="button" type="submit" value="play" id="start"> <input class="button" type="submit" id="chord" value="chord"></form><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><form><input id="mobile-keyboard"></form><img id="mapping"></div><script src="/rhythm-cooker/main.ee63461a2ecddf1ee3f8.js"></script></body><script></script></html>
+	}</style><body><img id="waves"><div class="container"><form onsubmit="return false;"><div class="row"><div class="bubble" id="bubble0"><label for="key" class="param">key</label><br><div class="input-container"><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div></div><div class="bubble" id="bubble1"><label for="tempo" class="param">tempo</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div></div></div><div class="row"><div class="bubble" id="bubble2"><label class="param">sound</label><br><div class="input-container"><select id="sound" name="sound"><option value="mallet">mallet</option><option value="synth">synth</option><option value="guitar">guitar</option><option value="kick">kick</option></select></div></div><div class="bubble" id="bubble3"><label class="param">repeat</label><br><div class="input-container"><select id="repeat" name="repeat"><option value="1">1 bar</option><option value="2">2 bars</option><option value="3">3 bars</option><option value="4">4 bars</option></select></div></div></div><input class="button" type="submit" value="play" id="start"> <input class="button" type="submit" id="chord" value="chord"></form><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><form><input id="mobile-keyboard"></form><img id="mapping"></div><script src="/rhythm-cooker/main.e57cd6948e07142167ea.js"></script></body><script></script></html>
