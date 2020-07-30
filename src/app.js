@@ -69,12 +69,12 @@ var sound = "mallet";
 document.getElementById("start").addEventListener("click", start);
 
 document.getElementById("start").addEventListener("mouseover", function() {
-	document.getElementById("start").style.background = "rgb(96, 135, 172)";
+	document.getElementById("start").style.background = "rgba(255, 255, 255, 1)";
 });
 
 document.getElementById("start").addEventListener("mouseout", function() {
 	if (!play) {
-		document.getElementById("start").style.background = "rgb(129, 166, 201)";
+		document.getElementById("start").style.background = "rgba(255, 255, 255, 0.8)";
 	}
 });
 
@@ -103,7 +103,7 @@ document.getElementById("chord").addEventListener("click", chord);
 
 document.getElementById("info").addEventListener("change", showInfo);
 // document.getElementById("info").addEventListener("mouseout", hideInfo);
-document.getElementById("tempo").addEventListener("onchange", updateTextInput);
+// document.getElementById("tempo").addEventListener("onchange", updateTextInput);
 
 function updateTextInput() {
 	let val = document.getElementById("tempo").value;
@@ -113,8 +113,6 @@ function updateTextInput() {
 
 function start() {
 	// document.getElementById("stop").addEventListener("click", stop);
-
-    var key = document.getElementById("key").value;
 	var tempo = parseInt(document.getElementById("tempo").value);
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
@@ -138,54 +136,18 @@ function start() {
 	
 	if (!play) {
 		document.getElementById("start").value = "stop";
-		document.getElementById("start").style.background = "rgb(96, 135, 172)";
-
-		var lengthList = [];
-
-		var remainingTime = 1;
+		document.getElementById("start").style.background = "rgba(255, 255, 255, 1)";
 	
-		while (remainingTime > 0) {
-			lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
-		}
+		let mml = initialMML(4, tempo);
+		mml += getMML();
 	
-		var noteList = getNotes(lengthList, key);
-	
-		let bar1 = format(lengthList, noteList);
-	
-		lengthList = [];
-	
-		remainingTime = 1;
-	
-		while (remainingTime > 0) {
-			lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
-		}
-	
-		var noteList = getNotes(lengthList, key);
-	
-		let bar2 = format(lengthList, noteList);
-	
-		var mml = initialMML(4, tempo);
-		// mml += bar1;
-		// mml += " ";
-		for (let i = 0; i < 300; i++) {
-			mml += bar1;
-			// mml += bar2;
-		}
-		// mml += bar2;
-		// mml += " ";
-		// mml += bar1 + bar2;
-		// mml += format(lengthList, noteList);
-	
-		// console.log(mml);
-		// console.log(tempo);
-
 		initializeGen();
 
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
 	}
 	else {
-		document.getElementById("start").style.background = "rgb(129, 166, 201)";
+		document.getElementById("start").style.background = "rgba(255, 255, 255, 0.8)";
 		document.getElementById("start").value = "play";
 		stop();
 		play = false;
@@ -197,8 +159,33 @@ function start() {
 	}
 }
 
+function getMML() {
+	let key = document.getElementById("key").value;
+	let bars = parseInt(document.getElementById("repeat").value);
+	let lengthList;
+	let remainingTime;
+	let noteList;
+	let segment = "";
+	let mml = "";
+	for (let i = 0; i < bars; i++) {
+		lengthList = [];
+		noteList = [];
 
-
+		remainingTime = 1;
+	
+		while (remainingTime > 0) {
+			lengthList, remainingTime = getNoteLength(lengthList, remainingTime);
+		}
+	
+		noteList = getNotes(lengthList, key);
+	
+		segment += format(lengthList, noteList);
+	}
+	for (let i = 0; i < 300; i++) {
+		mml += segment;
+	}
+	return mml;
+}
 
 function chord() {
 
@@ -221,6 +208,7 @@ function chord() {
 }
 
 function initializeGen() {
+	sound = document.getElementById("sound").value;
 	if (sound == "mallet") {
 		gen = T("OscGen", {wave:"sin", env:{type:"perc"}, mul:0.25}).play();
 	}
