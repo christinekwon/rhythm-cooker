@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"/><title>RHYTHM COOKER</title><link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"/><script>window.dataLayer = window.dataLayer || [];
+<!doctype html><html><head><meta charset="utf-8"/><title>RHYTHM COOKER</title><link rel="stylesheet" href="https://use.typekit.net/mrx6nig.css"><script>window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
@@ -6,12 +6,22 @@
 
 	gtag("config", "UA-165939739-1");</script><script src="https://code.jquery.com/jquery-3.5.0.js"></script><link rel="icon" href="/rhythm-cooker/favicon.ico"></head><style>body {
 		background-color: rgb(27, 27, 27);
-		font-size: 20px;
-		font-weight: 700;
 		color: white;
-		font-family: "Helvetica Neue";
+
+		font-family: ff-cocon-pro,sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 20px;
+
+		/* font-family: "Helvetica Neue";
 		letter-spacing: 0.5px;
-		padding: 0;
+		font-size: 20px;
+		font-weight: 700; */
+
+		/* font-family: sophisto,sans-serif;
+		font-weight: 700;
+		font-size: 20px;
+		font-style: normal; */
 	}
 
 	#waves {
@@ -21,12 +31,98 @@
 		bottom: 0;
 		overflow-y:scroll;
 		overflow-x:hidden;
+		z-index: -1;
 	}
 
 	.container {
 		text-align: center;
 		align-content: center;
-		margin-top: 5vh;
+		margin: 5vh 10vw;
+	}
+
+	.row {
+		align-content: center;
+		text-align: center;
+	}
+
+	.bubble {
+		vertical-align: top;
+		position: relative;;
+		top: 20%;
+		display: inline-block;
+		margin: 5%;
+		width: 30vw;
+		max-width: 150px;
+		height: 30vw;
+		max-height: 150px;
+		border-radius: 50%;
+		align-content: center;
+		text-align: center;
+		padding: 2vw;
+		opacity: 0.9;
+
+		box-shadow: 0px 0px 15px 0px black;
+
+		-webkit-transition: .2s;
+		transition: opacity .2s;
+	}
+
+	.bubble:hover {
+		opacity: 1;
+		/* box-shadow: 0px 0px 10px 0px white; */
+	}
+
+	.param {
+		display: block;
+		color:rgb(27, 27, 27);
+		margin-top: 10%;
+		margin-bottom: 0;
+	}
+
+
+	#bubble0 {
+		/* margin-top: 50%; */
+		/* background: #ffbbdf; */
+		/* background: rgb(238,174,202);
+		background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
+		/* background: rgb(255,233,203);
+		background: radial-gradient(circle, rgba(255,233,203,1) 0%, rgba(134,200,255,1) 100%); */
+		background: rgb(63,94,251);
+		background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 80%);
+	}
+	#bubble1 {
+		/* background: #ffaa9c;	 */
+		/* background: rgb(234,238,174);
+		background: radial-gradient(circle, rgba(208,174,238,1) 0%, rgba(174,238,178,1) 100%); */
+		/* background: rgb(203,255,207);
+		background: radial-gradient(circle, rgba(203,255,207,1) 0%, rgba(253,134,255,1) 100%); */
+		background: rgb(251,240,63);
+		background: radial-gradient(circle, rgba(255,239,111,1) 0%, rgba(93,70,252,1) 80%);
+	}
+	#bubble2 {
+		/* background: #fce781; */
+		/* background: rgb(234,238,174);
+		background: radial-gradient(circle, rgba(234,238,174,1) 0%, rgba(233,154,148,1) 100%);
+		 */
+		 /* background: rgb(238,203,255);
+		background: radial-gradient(circle, rgba(238,203,255,1) 0%, rgba(255,199,134,1) 100%); */
+
+		background: rgb(70,252,177);
+		background: radial-gradient(circle,rgba(255,133,111,1) 0%, rgba(70,252,177,1) 80%);
+	}
+	#bubble3 {
+		/* background: rgb(196,238,174);
+		background: radial-gradient(circle, rgba(196,238,174,1) 0%, rgba(233,148,223,1) 100%); */
+		/* background: rgb(203,206,255);
+		background: radial-gradient(circle, rgba(203,206,255,1) 0%, rgba(183,255,134,1) 100%); */
+		background: rgb(207,63,251);
+		background: radial-gradient(circle, rgba(207,63,251,1) 0%, rgba(252,207,70,1) 80%);
+	}
+	#bubble4 {
+		background: #b0c5ff;
+	}
+	#bubble5 {
+		background: #dcbbff;
 	}
 
 	.button {
@@ -34,24 +130,31 @@
 		align-content: center;
 		display: inline-block;
 		border: none;
-		color: white;
+		color: rgb(27, 27, 27);
 		background: transparent;
 		padding: 6px 10px 8px 10px;
-		font-size: 18px;
+		/* font-size: 18px;
 		font-weight: 700;
-		letter-spacing: 0.5px;
+		letter-spacing: 0.5px; */
+
+		font-family: ff-cocon-pro,sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 18px;
 
 		margin: 20px;
 		width: 100px;
 		border-radius: 30px;
-		background-color: rgb(129, 166, 201);
+		background-color: rgba(255, 255, 255, 0.80);
+
+		box-shadow: 0px 0px 25px 0px black;
 
 		-webkit-transition: .2s;
 		transition: background-color .2s;
 	}
 
 	.button:hover {
-		background-color: rgb(96, 135, 172);
+		background-color: rgb(255, 255, 255);
 	}
 
 	#mapping {
@@ -65,17 +168,20 @@
 	}
 
 	select {
-		width: 50vw;
-		max-width: 300px;
+		width: 100%;
+		/* max-width: 700px; */
 		padding: 7px;
-		margin: 15px;
+		/* margin: 15px; */
 		text-align: center;
 		border: 5px solid white;
 		border-radius: 30px;
 		opacity: 0.8;
 		background-color: white;
-		color: rgb(96, 135, 172);
-		font-weight: 700;
+		color: rgb(66, 66, 66);
+
+		font-family: ff-cocon-pro,sans-serif;
+		font-weight: 400;
+		font-style: normal;
 		font-size: 16px;
 
 		-webkit-transition: .2s;
@@ -89,19 +195,36 @@
 	option {
 		text-align: center;
 	}
+
+	/* tempo slider */
+
+	.input-container {
+		width: 90%;
+		/* background-color: red; */
+		/* position: relative; */
+		margin-top: -5%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		align-content: center;
+	}
 	
 	#tempo {
-		margin: 20px;      
+
 		-webkit-appearance: none;
-		width: 50vw;
-		max-width: 300px;
+		width: 100%;
+		/* max-width: 300px; */
 		height: 15px;
 		border-radius: 10px;
 		background: #ffffff;
+		/* border: 2px solid grey; */
 		outline: none;
 		opacity: 0.8;
 		-webkit-transition: .2s;
 		transition: opacity .2s;
+		margin-bottom: 20%;
+		/* box-shadow: 2px 2px 5px 0px grey; */
+
 	}
 
 	#tempo:hover {
@@ -114,159 +237,78 @@
 		width: 25px;
 		height: 25px;
 		border-radius: 50%;
-		background: rgb(96, 135, 172);
+		background: grey;
 		cursor: pointer;
 	}
 
+	#num {
+		text-align: center;
+		color: rgb(66, 66, 66);
+		font-size: 16px;
+	}
+	/*keyboard switch */
 
-	/*slider*/
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		margin: 20px;
+	}
 
-.switch {
-position: relative;
-display: inline-block;
-width: 60px;
-height: 34px;
-margin: 20px;
+	.switch input { 
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
 
-}
+	.slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color:rgb(131, 164, 196);
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 34px;
 
-.switch input { 
-opacity: 0;
-width: 0;
-height: 0;
-}
+	}
 
-.slider {
-position: absolute;
-cursor: pointer;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color:rgb(131, 164, 196);
--webkit-transition: .4s;
-transition: .4s;
-border-radius: 34px;
+	.slider:before {
+		position: absolute;
+		content: "";
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: white;
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 50%;
 
-}
+	}
 
-.slider:before {
-position: absolute;
-content: "";
-height: 26px;
-width: 26px;
-left: 4px;
-bottom: 4px;
-background-color: white;
--webkit-transition: .4s;
-transition: .4s;
-border-radius: 50%;
+	.slider:hover {
+		background-color: rgb(96, 135, 172);
+	}
 
-}
+	input:checked + .slider {
+		background-color: rgb(96, 135, 172);
+	}
 
-.slider:hover {
-	background-color: rgb(96, 135, 172);
-}
+	input:focus + .slider {
+		box-shadow: 0 0 1px rgb(96, 135, 172);
+	}
 
-input:checked + .slider {
-background-color: rgb(96, 135, 172);
-}
+	input:checked + .slider:before {
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
+		transform: translateX(26px);
+	}
 
-input:focus + .slider {
-box-shadow: 0 0 1px rgb(96, 135, 172);
-}
-
-input:checked + .slider:before {
--webkit-transform: translateX(26px);
--ms-transform: translateX(26px);
-transform: translateX(26px);
-}
-
-.input-container {
-	margin: 3vh auto;
-}
-
-.sound {
-	border-radius: 5px;
-	border: none;
-}
-
-.check-container {
-  display: inline-block;
-  position: relative;
-  padding-left: 35px;
-  margin: 20px 10px 0px 10px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default radio button */
-.check-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
-  border-radius: 50%;
-}
-
-
-/* On mouse-over, add a grey background color */
-.check-container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.check-container input:checked ~ .checkmark {
-  background-color: rgb(96, 135, 172);
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.check-container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.check-container .checkmark:after {
-  left: 7px;
-  top: 5px;
-  width: 3px;
-  height: 5px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.check-text {
-	font-size: 14px;
-	color:rgb(37, 71, 104);
-}
-
-.param {
-	color:white;
-}
-
-#mobile-keyboard {
-	visibility: hidden;
-}</style><body background=""><img id="waves"><div class="container"><form onsubmit="return false;"><div class="input-container"><label for="key" class="param">key</label><br><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div><div class="input-container"><label for="tempo" class="param">tempo</label><br><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div><div class="input-container"><label class="param">sound</label><br><label class="check-container"><input type="checkbox" class="sound" value="1" name="mallet" id="sound0" checked="true"/> <span class="check-text">mallet</span> <span class="checkmark"></span></label> <label class="check-container"><input type="checkbox" class="sound" value="1" name="synth" id="sound1"/> <span class="check-text">synth</span> <span class="checkmark"></span></label> <label class="check-container"><input type="checkbox" class="sound" value="1" name="guitar" id="sound2"/> <span class="check-text">guitar</span> <span class="checkmark"></span></label> <label class="check-container"><input type="checkbox" class="sound" value="1" name="kick" id="sound3"/> <span class="check-text">kick</span> <span class="checkmark"></span></label></div><input class="button" type="submit" value="play" id="start"></form><button class="button" id="chord">chord</button><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><img id="mapping"><form><input id="mobile-keyboard"></form></div><script src="/rhythm-cooker/main.692593320c6a3d2e16b4.js"></script></body><script></script></html>
+	#mobile-keyboard {
+		/* opacity: 0; */
+		/* visibility: hidden; */
+	}</style><body><img id="waves"><div class="container"><form onsubmit="return false;"><div class="row"><div class="bubble" id="bubble0"><label for="key" class="param">key</label><br><div class="input-container"><select id="key" name="key"><option value="C">c major [ a minor ]</option><option value="G">g major [ c minor ]</option><option value="D">d major [ b minor ]</option><option value="A">a major [ f# minor ]</option><option value="E">e major [ c# minor ]</option><option value="B">b major [ g# minor ]</option><option value="F+">f# major [ d# minor ]</option><option value="C+">c# major [ a# minor ]</option><option value="F">f major [ d minor ]</option><option value="B-">b&#9837; major [ g minor ]</option><option value="E-">e&#9837; major [ c minor ]</option><option value="A-">a&#9837; major [ f minor ]</option><option value="D-">d&#9837; major [ b&#9837; minor ]</option><option value="G-">g&#9837; major [ c&#9837; minor ]</option><option value="C-">c&#9837; major [ a&#9837; minor ]</option></select></div></div><div class="bubble" id="bubble1"><label for="tempo" class="param">tempo</label><br><div class="input-container"><input type="range" id="tempo" name="tempo" min="0" max="200" value="100" step="1" oninput="num.value = this.value"><br><output id="num">100</output></div></div></div><div class="row"><div class="bubble" id="bubble2"><label class="param">sound</label><br><div class="input-container"><select id="sound" name="sound"><option value="mallet">mallet</option><option value="synth">synth</option><option value="guitar">guitar</option><option value="kick">kick</option></select></div></div><div class="bubble" id="bubble3"><label class="param">repeat</label><br><div class="input-container"><select id="repeat" name="repeat"><option value="1">1 bar</option><option value="2">2 bars</option><option value="3">3 bars</option><option value="4">4 bars</option></select></div></div></div><input class="button" type="submit" value="play" id="start"></form><button class="button" id="chord">chord</button><br><br><label id="keyboard-text" for="switch">keyboard</label><br><label class="switch"><input type="checkbox" id="info"> <span class="slider round"></span></label><br><img id="mapping"><form><input id="mobile-keyboard"></form></div><script src="/rhythm-cooker/main.d39fb0d7aa93d2acff06.js"></script></body><script></script></html>
