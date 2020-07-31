@@ -345,18 +345,43 @@
 		select {
 			width: 100%;
 			padding: 7px;
-			text-align: center;
-			border: 5px solid white;
-			border-radius: 30px;
+			border-radius: 100px;
 			opacity: 1;
 			background-color: white;
-			color: rgb(66, 66, 66);
 
 			font-family: balboa-plus-fill,sans-serif;
 			font-size: 6vw;
 		}
 
+			
+		#tempo {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 50px;
+			border-radius: 10px;
+			background: #ffffff;
+			outline: none;
+			opacity: 0.8;
+			margin-bottom: 20%;
+		}
+
+		#tempo::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 52px;
+			height: 52px;
+			border-radius: 50%;
+			background: grey;
+			cursor: pointer;
+		}
+
+		#num {
+			text-align: center;
+			font-size: 2.5vw;
+		}
+
 		#keyboard-text {
+			margin-top: 20%;
 			font-size: 9vw;
 		}
 
