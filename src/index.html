@@ -174,7 +174,7 @@
 
 	.input-container {
 		width: 90%;
-		margin-top: 3%;
+		margin-top: 12%;
 		margin-left: auto;
 		margin-right: auto;
 		text-align: center;
@@ -343,7 +343,7 @@
 		}
 
 		select {
-			-webkit-appearance: none;
+			/* -webkit-appearance: none; */
 			width: 100%;
 			padding: 7px;
 			border-radius: 100px;
@@ -411,6 +411,12 @@
 			transition: .4s;
 			border-radius: 50%;
 		}
+
+		input:checked + .slider:before {
+		-webkit-transform: translateX(52px);
+		-ms-transform: translateX(52px);
+		transform: translateX(52px);
+	}
 
 	}
 
