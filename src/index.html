@@ -6,15 +6,8 @@
 	<!-- <link
 	rel="stylesheet"
 	href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
-	/>
-	<link rel="stylesheet" href="https://use.typekit.net/mrx6nig.css"> -->
+	/>-->
 	<link rel="stylesheet" href="https://use.typekit.net/mrx6nig.css">
-	<!-- <link rel="stylesheet" href="style.css"> -->
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- <script
-	async
-	src="https://www.googletagmanager.com/gtag/js?id=UA-165939739-1"
-	></script> -->
 	<script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
@@ -449,14 +442,6 @@
 					</select>
 				</div>
 			</div>
-			<!-- <label for="time">time:</label><br> -->
-			<!-- <select id="time" name="time">
-			<option value="44">4/4</option>
-			<option value="34">3/4</option>
-			<option value="24">2/4</option>
-			<option value="14">1/4</option>
-			<option value="68">6/8</option>
-			<br> -->
 			<div class="bubble" id="bubble1">
 				<label for="tempo" class="param">tempo</label><br>
 				<div class="input-container">
@@ -476,6 +461,7 @@
 						<option value="synth">synth</option>
 						<option value="guitar">guitar</option>
 						<option value="kick">kick</option>
+						<option value="organ">organ</option>
 					</select>
 				</div>
 			</div>
@@ -488,6 +474,34 @@
 						<option value="2">2 bars</option>
 						<option value="3">3 bars</option>
 						<option value="4">4 bars</option>
+					</select>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="bubble" id="bubble2">
+				<label class="param">octave</label><br>
+				<div class="input-container">
+					<select id="octave" name="octave">
+						<option value="2.0">2</option>
+						<option value="3.0">3</option>
+						<option value="2.5">2 + 3</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="bubble" id="bubble3">
+				<label class="param">time</label><br>
+				<div class="input-container">
+					<select id="time" name="time" value="4/4">
+						<!-- <option value="1/4">1/4</option> -->
+						<!-- <option value="2/4">2/4</option> -->
+						<!-- <option value="3/4">3/4</option> -->
+						<option value="4/4">4/4</option>
+						<option value="6/8">6/8</option>
+						<!-- <option value="4/4">4/4</option> -->
 					</select>
 				</div>
 

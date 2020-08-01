@@ -48,12 +48,14 @@ const SIXTH = 6;
 // const LENGTHS_4 = [HALF, QUARTER, EIGHTH, SIXTEENTH, DOTTED_QUARTER];
 // const LENGTHS_8 = [THIRD, TWO_THIRDS, SIXTEENTH];
 
-const LENGTHS = [HALF, QUARTER, EIGHTH, SIXTEENTH, DOTTED_QUARTER];
+const LENGTHS_4 = [HALF, DOTTED_HALF, DOTTED_QUARTER, QUARTER, EIGHTH, SIXTEENTH, QUARTER, EIGHTH, SIXTEENTH, QUARTER, EIGHTH, SIXTEENTH, QUARTER, EIGHTH, SIXTEENTH];
+// const LENGTHS_8 = [HALF, THIRD, SIXTH, SIXTEENTH];
+// const LENGTHS_8 = [HALF, THIRD, SIXTH, TWO_THIRDS, SIXTEENTH];
+const LENGTHS_8 = [SIXTEENTH];
 
 
 const NOTE_COUNT = 7;
-const LENGTH_COUNT = LENGTHS.length;
-const BARS = 4;
+// const LENGTH_COUNT = LENGTHS.length;
 
 const NUM_SOUNDS = 4;
 
@@ -98,41 +100,27 @@ for (var i = 0; i < sounds.length; i++) {
 	sounds[i].addEventListener("click", toggle);
 }
 
-
 document.getElementById("chord").addEventListener("click", chord);
 
 document.getElementById("info").addEventListener("change", showInfo);
-// document.getElementById("info").addEventListener("mouseout", hideInfo);
-// document.getElementById("tempo").addEventListener("onchange", updateTextInput);
 
-function updateTextInput() {
-	let val = document.getElementById("tempo").value;
-	console.log("H");
-	document.getElementById('tempo-text').value=val; 
+function getTempo() {
+	let tempo = parseInt(document.getElementById("tempo").value);
+	let beat = parseInt(document.getElementById("time").value.charAt(2));
+	if (beat == 4) {
+		return tempo;
+	}
+	else if (beat == 8) {
+		return tempo * (2 / 3);
+	}
 }
 
 function start() {
-	// document.getElementById("stop").addEventListener("click", stop);
-	var tempo = parseInt(document.getElementById("tempo").value);
+	var tempo = getTempo();
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
 
     T = require("./timbre.js");
-    
-  // c4c+d == c c# d 2-1-1
-  // + is a sharp
-  // - is a flat
-  // l# is length of note
-  // number after a note indicates its length
-  // if l8 and c4, then c is half of reg note length. if c2, c is 1/4 of note length
-  // greater note length = faster
-  // length = 4 =  quarter note
-  // length = 2 = half note, etc
-  // <c> ups an octave
-
-    // var mml = "l8 t120 c4c+d d+4ef f+4gg+ a4a+b <c>bb-aa-gg-fee-dd-c2.";
-
-	// var mml = "l2 g0<c0e>";
 	
 	if (!play) {
 		document.getElementById("start").value = "stop";
@@ -162,14 +150,19 @@ function start() {
 function getMML() {
 	let key = document.getElementById("key").value;
 	let bars = parseInt(document.getElementById("repeat").value);
+	let octave = parseFloat(document.getElementById("octave").value);
 	let lengthList;
 	let remainingTime;
 	let noteList;
 	let segment = "";
 	let mml = "";
+	if (octave == "3.0") {
+		segment += "<";
+	}
 	for (let i = 0; i < bars; i++) {
 		lengthList = [];
 		noteList = [];
+
 
 		remainingTime = 1;
 	
@@ -181,6 +174,10 @@ function getMML() {
 	
 		segment += format(lengthList, noteList);
 	}
+	if (octave == "3.0") {
+		segment += ">";
+	}
+	console.log(segment);
 	for (let i = 0; i < 300; i++) {
 		mml += segment;
 	}
@@ -188,7 +185,6 @@ function getMML() {
 }
 
 function chord() {
-
     var key = document.getElementById("key").value;
 
 	T = require("./timbre.js");
@@ -215,8 +211,8 @@ function initializeGen() {
 	else if (sound == "synth") {
 		// synth, change r for reverb
 		var osc = T("pulse");
-		var env = T("perc", {a:50, r:2500});
-		gen = T("OscGen", {osc:osc, env:env, mul:0.1}).play();
+		var env = T("perc", {a:0, r:800});
+		gen = T("OscGen", {osc:osc, env:env, mul:0.05}).play();
 	}
 	else if (sound == "guitar") {
 		var env = T("perc", {a:50, r:2500});
@@ -224,36 +220,54 @@ function initializeGen() {
 	}
 	else if (sound == "kick") {
 		// drum, add changes things
-		gen = T("OscGen", {wave:"sin", freq:2, add:3200, mul:0.3, kr:10}).play();
+		var osc = T("pulse");
+		var env = T("perc", {a:0, r:800});
+		gen = T("OscGen", {wave:"sin", env:env, osc:osc, freq:2, add:3200, mul:0.3, kr:1000}).play();
+	}
+	else if (sound == "organ") {
+		T("osc", {wave:"wavc(0200080f)", mul:0.15}).plot({target:wavc}).play();
 	}
 }
 
 function getNoteLength(lengthList, remainingTime) {
-	// if (beat == "4") {
+	let time = document.getElementById("time").value;
+	let beat = parseInt(time.charAt(2));
+	var lengths;
+	var length_count;
 
-	// }
-    let randLength = LENGTHS[Math.floor(Math.random() * (LENGTH_COUNT))];
+	if (beat == 4) {
+		lengths = LENGTHS_4;
+		length_count = LENGTHS_4.length;
+	}
+	else if (beat == 8) {
+		lengths = LENGTHS_8;
+		length_count = LENGTHS_8.length;
+	}
+
+    let randLength = lengths[Math.floor(Math.random() * (length_count))];
     let len = lengthList.length;
     // if (len >=2 && lengthList[len - 1] == 16 && lengthList[len - 2 != 16]) {
 
 	// }
 	// don't want 2 half notes in a rhythm
-	if (lengthList.includes(HALF)) {
-		while (randLength <= HALF) {
-			randLength = LENGTHS[Math.floor(Math.random() * (LENGTH_COUNT))];
+	if (beat == 4) {
+		if (lengthList.includes(HALF)) {
+			while (randLength <= HALF) {
+				randLength = lengths[Math.floor(Math.random() * (length_count))];
+			}
 		}
-		// console.log("EHRE");
 	}
-	// console.log(lengthList);
-
 
     if ((1 / randLength) > remainingTime) {
 		// let prev = lengthList[lengthList.length - 1];
-		// console.log(randLength + " " + remainingTime);
-        lengthList.push(1 / remainingTime);
-
+		// lengthList.push(1 / remainingTime);
+		
+		let prev = 1 / lengthList[len - 1];
+		// console.log(prev);
+		prev += remainingTime;
+		// console.log(prev);
+		lengthList[len - 1] = (1 / prev);
         // lengthList[lengthList.length - 1] += getBarLength(remainingTime);
-        // console.log(remainingTime);
         remainingTime = 0;
     }
     else {
@@ -295,10 +309,28 @@ function initialMML(length, tempo) {
 }
 
 function format(lengthList, noteList) {
-        // var mml = "l2 g0<c0e>";
+	let octave = parseFloat(document.getElementById("octave").value);
+	let octaves;
+	if (octave == 2.5) {
+		octaves = [];
+		for (let i = 0; i < lengthList.length; i++) {
+			// 2 or 3;
+			octaves.push(Math.floor(Math.random() * (4 - 2)) + 2);
+		}
+	}
     let output = "";
     for (let i = 0; i< lengthList.length; i++) {
-        output += noteList[i] + lengthList[i];
+		if (octave == 2.5) {
+			if (octaves[i] == 2) {
+				output += noteList[i] + lengthList[i];
+			}
+			else {
+				output += "<" + noteList[i] + lengthList[i] + ">";
+			}
+		}
+		else {
+			output += noteList[i] + lengthList[i];
+		}
     }
     return output;
 }
@@ -308,11 +340,8 @@ document.getElementById("mapping").src = MAPPING;
 document.getElementById("waves").src = WAVES;
 
 function showInfo() {
-	// trigger("focus");
-
 	var isChecked = document.getElementById("info").checked;
 	if (isChecked) {
-		// $(document.getElementById("mobile-keyboard")).focus();
 		$(document.getElementById("mobile-keyboard")).trigger("focus");
 
 		document.getElementById("mapping").style.visibility = "visible";
