@@ -80,6 +80,9 @@ document.getElementById("start").addEventListener("mouseout", function() {
 	}
 });
 
+document.getElementById("chord").addEventListener("click", chord);
+
+
 function toggle(e){
 	var checkbox;
 	let id;
@@ -99,8 +102,6 @@ var sounds = document.getElementsByClassName("sound");
 for (var i = 0; i < sounds.length; i++) {
 	sounds[i].addEventListener("click", toggle);
 }
-
-document.getElementById("chord").addEventListener("click", chord);
 
 document.getElementById("info").addEventListener("change", showInfo);
 
@@ -185,21 +186,58 @@ function getMML() {
 }
 
 function chord() {
-    var key = document.getElementById("key").value;
-
-	T = require("./timbre.js");
-
-	// var mml = "l2 g0<c0e>";
-	var mml = "l1" + keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + "0"
-	+ keys[key][Math.floor(Math.random() * (NOTE_COUNT))];
-
-	initializeGen();
+	if (!play) {
+		var tempo = getTempo();
+		document.getElementById("chord").value = "stop";
+		document.getElementById("start").style.background = "rgba(255, 255, 255, 1)";
 	
-    var music = T("mml", {mml:mml}, gen).on("ended", stop).start();
+		var key = document.getElementById("key").value;
+
+		T = require("./timbre.js");
 	
+		// var mml = "l1 g0<c0e> g0<c0e>";
+		var mml = "l2 t" + tempo + " ";
+		
+		var chords = getChord(key) + getChord(key) + getChord(key) + getChord(key);
+	
+		for (let i = 0; i < 300; i++) {
+			mml += chords;
+		}
+		console.log(chords);
+	
+		initializeGen();
+		
+		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
+		play = true;
+	}
+	else {
+		document.getElementById("chord").style.background = "rgba(255, 255, 255, 0.8)";
+		document.getElementById("chord").value = "chord";
+		stop();
+		play = false;
+	}
+
 	function stop() {
 		gen.pause();
 		music.stop();
+	}
+}
+
+function getChord(key) {
+	let numNotes = 2;
+	// var numNotes = Math.floor(Math.random() * (4 - 2)) + 2;
+	if (numNotes == 2) {
+		let note1 = Math.floor(Math.random() * (NOTE_COUNT));
+		let note2 = Math.floor(Math.random() * (NOTE_COUNT));
+		while (note1 == note2 || Math.abs(note1 - note2) == 1) {
+			note2 = Math.floor(Math.random() * (NOTE_COUNT));
+		}
+		return keys[key][note1] + "0" + keys[key][note2] + " ";
+	}
+	else if (numNotes == 3) {
+		return keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + "0"
+		+ keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + "0"
+		+ keys[key][Math.floor(Math.random() * (NOTE_COUNT))] + " ";
 	}
 }
 
