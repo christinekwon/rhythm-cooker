@@ -88,27 +88,33 @@
 	}
 
 	#bubble0 {
-		background: rgb(63,94,251);
-		background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 80%);
+		/* background: rgb(63,94,251); */
+		/* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(255,97,145,1) 80%); */
+		background: rgb(241,255,64);
+		background: radial-gradient(circle, rgba(241,255,64,1) 0%, rgba(255,97,164,1) 80%);
+	
 	}
 	#bubble1 {
 		background: rgb(251,240,63);
-		background: radial-gradient(circle, rgba(255,239,111,1) 0%, rgba(93,70,252,1) 80%);
+		background: radial-gradient(circle, rgba(97,255,245,1) 0%, rgba(93,70,252,1) 80%);
 	}
 	#bubble2 {
 		background: rgb(70,252,177);
-		background: radial-gradient(circle,rgba(255,133,111,1) 0%, rgba(70,252,177,1) 80%);
+		background: radial-gradient(circle,rgba(64,129,255,1) 0%, rgba(70,252,177,1) 80%);
 	}
 	#bubble3 {
 		background: rgb(207,63,251);
-		background: radial-gradient(circle, rgba(207,63,251,1) 0%, rgba(252,207,70,1) 80%);
+		background: radial-gradient(circle, rgba(255,64,64,1) 0%, rgb(255, 183, 83) 80%);
 	}
 	#bubble4 {
-		background: #b0c5ff;
+		background: rgb(255,134,255);
+		background: radial-gradient(circle, rgb(255, 26, 186) 0%, rgb(230, 154, 255) 80%);
 	}
 	#bubble5 {
-		background: #dcbbff;
+		background: rgb(96,255,71);
+		background: radial-gradient(circle, rgba(96,255,71,1) 0%, rgba(250,252,70,1) 80%);
 	}
+
 
 	.button {
 		align-content: center;
@@ -136,6 +142,11 @@
 
 	.button:hover {
 		background-color: rgb(255, 255, 255);
+	}
+
+	#mml {
+		font-size: 4vw;
+		padding: 45% 0;
 	}
 
 	select {
@@ -446,9 +457,9 @@
 				<label for="tempo" class="param">tempo</label><br>
 				<div class="input-container">
 					<input type="range" id="tempo" name="tempo" 
-					min="0" max="200" value="80" step="1" oninput="num.value = this.value">
+					min="0" max="200" value="100" step="1" oninput="num.value = this.value">
 					<br>
-					<output id="num">80</output>
+					<output id="num">100</output>
 				</div>
 				</div>
 		</div>
@@ -481,7 +492,7 @@
 		</div>
 
 		<div class="row">
-			<div class="bubble" id="bubble2">
+			<div class="bubble" id="bubble4">
 				<label class="param">octave</label><br>
 				<div class="input-container">
 					<select id="octave" name="octave">
@@ -492,7 +503,7 @@
 				</div>
 			</div>
 
-			<div class="bubble" id="bubble3">
+			<div class="bubble" id="bubble5">
 				<label class="param">time</label><br>
 				<div class="input-container">
 					<select id="time" name="time" value="4/4">
@@ -541,7 +552,8 @@
 
 		<input class="button" type="submit" value="play" id="start">
 		<input class="button" type="submit" id="chord" value="chord">
-
+		<br>
+		<output id="mml"></output>
 		<!-- <button class="button" id="stop">stop</button> -->
 	</form> 
 

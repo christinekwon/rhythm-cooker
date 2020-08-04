@@ -134,10 +134,13 @@ function start() {
 
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
+
 	}
 	else {
 		document.getElementById("start").style.background = "rgba(255, 255, 255, 0.8)";
 		document.getElementById("start").value = "play";
+		document.getElementById("mml").value = "";
+
 		stop();
 		play = false;
 	}
@@ -178,10 +181,10 @@ function getMML() {
 	if (octave == "3.0") {
 		segment += ">";
 	}
-	console.log(segment);
 	for (let i = 0; i < 300; i++) {
 		mml += segment;
 	}
+	document.getElementById("mml").value = segment;
 	return mml;
 }
 
@@ -209,12 +212,14 @@ function chord() {
 		
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
+		document.getElementById("mml").value = chords;
 	}
 	else {
 		document.getElementById("chord").style.background = "rgba(255, 255, 255, 0.8)";
 		document.getElementById("chord").value = "chord";
 		stop();
 		play = false;
+		document.getElementById("mml").value = "";
 	}
 
 	function stop() {
@@ -301,9 +306,7 @@ function getNoteLength(lengthList, remainingTime) {
 		// lengthList.push(1 / remainingTime);
 		
 		let prev = 1 / lengthList[len - 1];
-		// console.log(prev);
 		prev += remainingTime;
-		// console.log(prev);
 		lengthList[len - 1] = (1 / prev);
         // lengthList[lengthList.length - 1] += getBarLength(remainingTime);
         remainingTime = 0;
@@ -314,21 +317,6 @@ function getNoteLength(lengthList, remainingTime) {
     }
     
     return lengthList, remainingTime;
-}
-
-function getBarLength(remainingTime) {
-    let count = 0;
-    while (remainingTime > 0.1875) {
-        count++;
-    }
-    console.log(count);
-
-    return 16 / count;
-    // let sum = 0.0;
-    // for (let i = 0; i < lengthList.length; i++) {
-    //     sum += (1 / lengthList[i]);
-    // }
-    // return 1.0 - sum;
 }
 
 function getNotes(lengthList, key) {
@@ -367,7 +355,7 @@ function format(lengthList, noteList) {
 			}
 		}
 		else {
-			output += noteList[i] + lengthList[i];
+			output += noteList[i] + lengthList[i] + " ";
 		}
     }
     return output;
