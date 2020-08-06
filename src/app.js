@@ -68,7 +68,7 @@ var music;
 var keyboard;
 var sound = "mallet";
 
-document.getElementById("start").addEventListener("click", start);
+document.getElementById("start").addEventListener("click", rhythm);
 
 document.getElementById("start").addEventListener("mouseover", function() {
 	document.getElementById("start").style.background = "rgba(255, 255, 255, 1)";
@@ -81,7 +81,15 @@ document.getElementById("start").addEventListener("mouseout", function() {
 });
 
 document.getElementById("chord").addEventListener("click", chord);
+document.getElementById("chord").addEventListener("mouseover", function() {
+	document.getElementById("chord").style.background = "rgba(255, 255, 255, 1)";
+});
 
+document.getElementById("chord").addEventListener("mouseout", function() {
+	if (!play) {
+		document.getElementById("chord").style.background = "rgba(255, 255, 255, 0.8)";
+	}
+});
 
 function toggle(e){
 	var checkbox;
@@ -116,7 +124,8 @@ function getTempo() {
 	}
 }
 
-function start() {
+function rhythm() {
+	console.log("SH");
 	var tempo = getTempo();
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
@@ -138,8 +147,8 @@ function start() {
 	}
 	else {
 		document.getElementById("start").style.background = "rgba(255, 255, 255, 0.8)";
-		document.getElementById("start").value = "play";
-		document.getElementById("mml").value = "";
+		document.getElementById("start").value = "rhythm";
+		document.getElementById("mml").innerHTML = "";
 
 		stop();
 		play = false;
@@ -184,7 +193,7 @@ function getMML() {
 	for (let i = 0; i < 300; i++) {
 		mml += segment;
 	}
-	document.getElementById("mml").value = segment;
+	document.getElementById("mml").innerHTML = segment;
 	return mml;
 }
 
@@ -212,14 +221,14 @@ function chord() {
 		
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
-		document.getElementById("mml").value = chords;
+		document.getElementById("mml").innerHTML = chords;
 	}
 	else {
 		document.getElementById("chord").style.background = "rgba(255, 255, 255, 0.8)";
 		document.getElementById("chord").value = "chord";
 		stop();
 		play = false;
-		document.getElementById("mml").value = "";
+		document.getElementById("mml").innerHTML = "";
 	}
 
 	function stop() {

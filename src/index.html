@@ -144,9 +144,17 @@
 		background-color: rgb(255, 255, 255);
 	}
 
+	.button-container {
+		margin: 0 auto;
+	}
+
+	input {
+		-webkit-appearance: none;
+	}
+
 	#mml {
 		font-size: 4vw;
-		padding: 45% 0;
+		padding: 5%;
 	}
 
 	select {
@@ -541,20 +549,12 @@
 			</label> -->
 	<!-- </div> -->
 
-	<!-- last row of bubbles -->
-		<!-- <div class="row">
-			<div class="bubble" id="bubble4">
-			</div>
-			<div class="bubble" id="bubble5">
-			</div>
-		</div> -->
+		<div class="button-container">
+			<input class="button" type="button" value="rhythm" id="start">
+			<input class="button" type="button" id="chord" value="chord">
+		</div>
+		<div id="mml"></div>
 
-
-		<input class="button" type="submit" value="play" id="start">
-		<input class="button" type="submit" id="chord" value="chord">
-		<br>
-		<output id="mml"></output>
-		<!-- <button class="button" id="stop">stop</button> -->
 	</form> 
 
 		<br><br>
