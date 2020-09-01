@@ -125,7 +125,6 @@ function getTempo() {
 }
 
 function rhythm() {
-	console.log("SH");
 	var tempo = getTempo();
 	// var bpm = document.getElementById("time").value[0]; // beats per measure
 	// var beat = document.getElementById("time").value[1];
@@ -277,7 +276,9 @@ function initializeGen() {
 		gen = T("OscGen", {wave:"sin", env:env, osc:osc, freq:2, add:3200, mul:0.3, kr:1000}).play();
 	}
 	else if (sound == "organ") {
-		T("osc", {wave:"wavc(0200080f)", mul:0.15}).plot({target:wavc}).play();
+		gen = T("osc", {wave:"wavc(0200080f)", mul:0.5}).play();
+		// gen = T("osc", {mul:0.15}).play();
+
 	}
 }
 
