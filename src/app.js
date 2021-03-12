@@ -6,11 +6,59 @@
  * handles window resizes.
  *
  */
-// import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-// import { SeedScene } from 'scenes';
+import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { SeedScene } from 'scenes';
 import MAPPING from "./mapping.png";
 import WAVES from "./waves.png";
+
+
+// Initialize core ThreeJS components
+const scene = new SeedScene();
+const camera = new PerspectiveCamera();
+const renderer = new WebGLRenderer({ antialias: true });
+// renderer.gammaInput = true;
+// renderer.gammaOutput = true;
+// Set up camera
+camera.position.set(0, 2, -15);
+camera.lookAt(new Vector3(0, 0, 0));
+
+// scene.background = "rgb(0,0,0)";
+
+// Set up renderer, canvas, and minor CSS adjustments
+renderer.setPixelRatio(window.devicePixelRatio);
+const canvas = renderer.domElement;
+canvas.style.display = 'block'; // Removes padding below canvas
+document.body.style.margin = 0; // Removes margin around page
+// document.body.style.overflow = 'hidden'; // Fix scrolling
+document.body.appendChild(canvas);
+
+// Set up controls
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.minDistance = 4;
+controls.maxDistance = 16;
+controls.update();
+
+// Render loop
+const onAnimationFrameHandler = (timeStamp) => {
+    controls.update();
+    renderer.render(scene, camera);
+    scene.update && scene.update(timeStamp);
+    window.requestAnimationFrame(onAnimationFrameHandler);
+};
+window.requestAnimationFrame(onAnimationFrameHandler);
+
+// Resize Handler
+const windowResizeHandler = () => {
+    const { innerHeight, innerWidth } = window;
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+};
+windowResizeHandler();
+window.addEventListener('resize', windowResizeHandler, false);
 
 
 // initialize constants
@@ -39,7 +87,9 @@ const QUARTER = 4;
 const EIGHTH = 8;
 const SIXTEENTH = 16;
 const DOTTED_HALF = 4 / 3;
+// const DOTTED_HALF = 1.33;
 const DOTTED_QUARTER = 8 / 3;
+// const DOTTED_QUARTER = 2.67;
 
 const THIRD = 3;
 const TWO_THIRDS = 3 / 2;
@@ -52,7 +102,6 @@ const LENGTHS_4 = [HALF, DOTTED_HALF, DOTTED_QUARTER, QUARTER, EIGHTH, SIXTEENTH
 // const LENGTHS_8 = [HALF, THIRD, SIXTH, SIXTEENTH];
 // const LENGTHS_8 = [HALF, THIRD, SIXTH, TWO_THIRDS, SIXTEENTH];
 const LENGTHS_8 = [SIXTEENTH];
-
 
 const NOTE_COUNT = 7;
 // const LENGTH_COUNT = LENGTHS.length;
@@ -67,6 +116,7 @@ var gen;
 var music;
 var keyboard;
 var sound = "mallet";
+var lengthList;
 
 document.getElementById("start").addEventListener("click", rhythm);
 
@@ -142,7 +192,7 @@ function rhythm() {
 
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
-
+		// scene.changeColors(tempo, lengthList);
 	}
 	else {
 		document.getElementById("start").style.background = "rgba(255, 255, 255, 0.8)";
@@ -151,6 +201,7 @@ function rhythm() {
 
 		stop();
 		play = false;
+		// scene.stopColors();
 	}
 	
 	function stop() {
@@ -163,7 +214,6 @@ function getMML() {
 	let key = document.getElementById("key").value;
 	let bars = parseInt(document.getElementById("repeat").value);
 	let octave = parseFloat(document.getElementById("octave").value);
-	let lengthList;
 	let remainingTime;
 	let noteList;
 	let segment = "";
@@ -192,7 +242,8 @@ function getMML() {
 	for (let i = 0; i < 300; i++) {
 		mml += segment;
 	}
-	document.getElementById("mml").innerHTML = segment;
+	console.log(segment);
+	// document.getElementById("mml").innerHTML = segment;
 	return mml;
 }
 
@@ -220,7 +271,7 @@ function chord() {
 		
 		music = T("mml", {mml:mml}, gen).on("ended", stop).start();
 		play = true;
-		document.getElementById("mml").innerHTML = chords;
+		// document.getElementById("mml").innerHTML = chords;
 	}
 	else {
 		document.getElementById("chord").style.background = "rgba(255, 255, 255, 0.8)";
@@ -311,13 +362,15 @@ function getNoteLength(lengthList, remainingTime) {
 		}
 	}
 
+	// last note
     if ((1 / randLength) > remainingTime) {
 		// let prev = lengthList[lengthList.length - 1];
 		// lengthList.push(1 / remainingTime);
 		
 		let prev = 1 / lengthList[len - 1];
 		prev += remainingTime;
-		lengthList[len - 1] = (1 / prev);
+		// lengthList[len - 1] = truncateDecimals(1 / prev, 1);
+		lengthList[len - 1] = truncateDecimals(1 / prev, 2);
         // lengthList[lengthList.length - 1] += getBarLength(remainingTime);
         remainingTime = 0;
     }
@@ -328,6 +381,14 @@ function getNoteLength(lengthList, remainingTime) {
     
     return lengthList, remainingTime;
 }
+
+function truncateDecimals(number, digits) {
+    var multiplier = Math.pow(10, digits),
+        adjustedNum = number * multiplier,
+        truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
+
+    return truncatedNum / multiplier;
+};
 
 function getNotes(lengthList, key) {
     let noteList = [];
@@ -373,7 +434,8 @@ function format(lengthList, noteList) {
 
 
 document.getElementById("mapping").src = MAPPING;
-document.getElementById("waves").src = WAVES;
+// set background image
+document.getElementById("waves").src = WAVES; 
 
 function showInfo() {
 	var isChecked = document.getElementById("info").checked;

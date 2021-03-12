@@ -10,7 +10,7 @@ class Flower extends Group {
 
         // Init state
         this.state = {
-            gui: parent.state.gui,
+            // gui: parent.state.gui,
             bob: true,
             spin: this.spin.bind(this),
             twirl: 0,
@@ -28,8 +28,8 @@ class Flower extends Group {
         parent.addToUpdateList(this);
 
         // Populate GUI
-        this.state.gui.add(this.state, 'bob');
-        this.state.gui.add(this.state, 'spin');
+        // this.state.gui.add(this.state, 'bob');
+        // this.state.gui.add(this.state, 'spin');
     }
 
     spin() {
